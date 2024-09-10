@@ -3,14 +3,14 @@ import localFont from "next/font/local";
 import "./globals.css";
 
 const inter = localFont({
-  src: "./fonts/Inter.woff2",
+  src: "../fonts/Inter.woff2",
   variable: "--font-inter",
   weight: "100 900",
 });
 
 export const metadata: Metadata = {
   title: "Escola CMS",
-  description: "Blog para publicação de artigos e aulas dos professores com o propósito de serem lidos pelo corpo discente e docente",
+  description: "Blog para publicação de artigos e aulas dos professores com o propósito de serem consumidos pelo corpo discente e docente",
 };
 
 export default function RootLayout({

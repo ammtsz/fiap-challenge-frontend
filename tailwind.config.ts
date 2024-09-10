@@ -8,12 +8,17 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        inter: ['Inter', 'sans-serif'],
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
         primary: "var(--primary)",
+        primary_hover: "var(--primary_hover)",
         secondary: "var(--secondary)",
         danger: "var(--danger)",
+        danger_hover: "var(--danger_hover)",
       },
     },
   },

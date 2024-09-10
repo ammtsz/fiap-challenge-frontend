@@ -4,19 +4,23 @@
 
 :root {
   --background: #F1F1F1;
-  --foreground: #FFFFFF;
+  --foreground: #000000;
   --primary: #CD5600;
+  --primary_hover: #a14300;
   --secondary: #FFF1E7;
-  --danger: #FF4646;
+  --danger: #b10000;
+  --danger_hover: #8b0000;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
     --background: #F1F1F1;
-    --foreground: #FFFFFF;
+    --foreground: #000000;
     --primary: #CD5600;
+    --primary_hover: #a14300;
     --secondary: #FFF1E7;
-    --danger: #FF4646;
+    --danger: #b10000;
+    --danger_hover: #8b0000;
   }
 }
 
@@ -31,4 +35,51 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.page {
+  @apply flex flex-col h-screen my-8 mx-32;
+}
+
+.btn {
+  @apply
+  transition-all
+  flex
+  justify-center
+  items-center
+  rounded-lg
+  py-1.5
+  px-5
+  text-lg
+  text-center
+  font-bold
+  font-inter
+}
+
+.primary_btn {
+  @apply
+  btn
+  text-white
+  bg-primary
+  hover:bg-primary_hover
+}
+
+.secondary_btn {
+  @apply
+  btn
+  border-2
+  border-primary
+  hover:border-primary_hover
+  bg-white
+  hover:bg-secondary
+  text-primary
+  hover:text-primary_hover
+}
+
+.danger_btn {
+  @apply
+  btn
+  bg-danger
+  text-white
+  hover:bg-danger_hover
 }
