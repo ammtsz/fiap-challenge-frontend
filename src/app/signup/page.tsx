@@ -1,8 +1,10 @@
+import { PageContainer } from "@/components";
+
 const Signup = () => {
   return (
-    <main className="page">
+    <PageContainer>
       <h1>Signup</h1>
-    </main>
+    </PageContainer>
   )
 };
 

@@ -1,11 +1,11 @@
-import { Divider, PageTitle } from "@/components";
+import { Divider, PageContainer, PageTitle } from "@/components";
 
 const Create = () => {
   return (
-    <main className="page">
+    <PageContainer>
       <PageTitle title="Nova Postagem"/>
       <Divider />
-    </main>
+    </PageContainer>
   )
 };
 

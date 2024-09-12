@@ -1,12 +1,12 @@
-import { Divider, PageTitle, SearchBar } from "@/components";
+import { Divider, PageContainer, PageTitle, SearchBar } from "@/components";
 
 const Admin = () => {
   return (
-    <main className="page">
+    <PageContainer>
       <PageTitle title="Administração de Postagens"/>
       <Divider />
       <SearchBar className="block md:hidden"/>
-    </main>
+    </PageContainer>
   )
 };
 

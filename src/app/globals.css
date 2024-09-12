@@ -27,7 +27,7 @@
 
 @layer utilities {
   .content-height {
-    height: calc(var(--navbar-height) - 100vh);
+    min-height: calc(var(--navbar-height) - 100vh);
   }
 }
 
@@ -42,8 +42,12 @@ body {
   outline-color: var(--primary);
 }
 
+.page-container {
+  @apply flex justify-center content-height font-inter w-full;
+}
+
 .page {
-  @apply flex flex-col content-height my-8 mx-8 xs:mx-16 sm:mx-24 md:mx-32 font-inter;
+  @apply flex flex-col w-full h-full my-8 mx-8 xs:mx-16 sm:mx-24 md:mx-32 max-w-screen-lg;
 }
 
 .btn {

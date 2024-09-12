@@ -1,13 +1,13 @@
 "use client"
 
-import { Button, LinkButton } from "@/components"
+import { Button, LinkButton, PageContainer } from "@/components"
 import { useLogin } from "./hooks/useLogin";
 
 const Login = () => {
   const { handleLogin } = useLogin()
 
   return (
-    <main className="page">
+    <PageContainer>
       <h1 className="mb-12">Login Page</h1>
         <Button className="mb-2" handleClick={handleLogin}>Login</Button>
         <LinkButton
@@ -16,7 +16,7 @@ const Login = () => {
           variation="danger">
           Registrar-se
         </LinkButton>
-    </main>
+    </PageContainer>
   )
 };
 

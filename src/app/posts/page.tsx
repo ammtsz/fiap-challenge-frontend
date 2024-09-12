@@ -1,6 +1,6 @@
 "use client"
 
-import { SearchBar, PageTitle, Divider } from "@/components";
+import { SearchBar, PageTitle, Divider, PageContainer } from "@/components";
 import { usePostsContext } from "@/contexts";
 import { formatDate, formatTime } from "@/utils/dateAndTime";
 
@@ -8,7 +8,7 @@ const Posts = () =>  {
   const { posts } = usePostsContext()
 
   return (
-    <main className="page">
+    <PageContainer>
       <PageTitle title="Lista de Posts"/>
       <Divider />
       <SearchBar className="block md:hidden"/>
@@ -24,7 +24,7 @@ const Posts = () =>  {
           </div>
         )
       })}
-    </main>
+    </PageContainer>
   );
 }
 
