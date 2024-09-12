@@ -1,13 +1,15 @@
 "use client"
 
-interface ButtonProps extends React.ComponentProps<'button'> {
+import Link, { LinkProps } from 'next/link'
+
+interface LinkButtonProps extends LinkProps {
   handleClick: () => void;
   className?: string;
   variation?: 'primary' | 'secondary' | 'danger';
   children: React.ReactNode;
 }
 
-export const Button: React.FC<ButtonProps> = ({
+export const LinkButton: React.FC<LinkButtonProps> = ({
   handleClick,
   className,
   children,
@@ -17,12 +19,12 @@ export const Button: React.FC<ButtonProps> = ({
 
   const onClick = () => handleClick();
   return (
-      <button
+      <Link
         onClick={onClick}
         className={`${variation}_btn ${className}`}
         {...rest}
       >
         {children}
-      </button>
+      </Link>
   )
 };

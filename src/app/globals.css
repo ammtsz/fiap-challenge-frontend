@@ -10,6 +10,7 @@
   --secondary: #FFF1E7;
   --danger: #b10000;
   --danger_hover: #8b0000;
+  --navbar-height: 80px;
 }
 
 @media (prefers-color-scheme: light) {
@@ -21,6 +22,12 @@
     --secondary: #FFF1E7;
     --danger: #b10000;
     --danger_hover: #8b0000;
+  }
+}
+
+@layer utilities {
+  .content-height {
+    height: calc(var(--navbar-height) - 100vh);
   }
 }
 
@@ -38,7 +45,7 @@ body {
 }
 
 .page {
-  @apply flex flex-col h-screen my-8 mx-32;
+  @apply flex flex-col content-height my-8 mx-8 xs:mx-16 sm:mx-24 md:mx-32 font-inter;
 }
 
 .btn {

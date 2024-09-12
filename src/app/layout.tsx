@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { Header } from "@/components";
+import { UserProvider } from "@/contexts/user";
 
 const inter = localFont({
   src: "../fonts/Inter.woff2",
@@ -23,7 +25,10 @@ export default function RootLayout({
       <body
         className={`${inter.variable} bg-[var(--background)]`}
       >
-        {children}
+        <UserProvider>
+          <Header />
+          {children}
+        </UserProvider>
       </body>
     </html>
   );

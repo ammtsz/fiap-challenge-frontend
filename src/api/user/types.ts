@@ -1,3 +1,3 @@
 import { User } from '@/types/users';
 
-export type UserResponse = User & { password?: string }
+export type UserResponse = User

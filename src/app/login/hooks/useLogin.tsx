@@ -1,17 +1,20 @@
 
 import { login }  from "@/api/auth"
 import { getPosts } from "@/api/posts";
-import { getUser } from "@/api/user";
+import { useUserContext } from "@/contexts/user";
 
-const mockUser = 'studenttest@mail.com'
+
+const mockUser = 'teacher@mail.com'
 const mockPassword = '123'
 
 export const useLogin = () => {
+  const { loadLoggedUser } = useUserContext();
+
   const handleLogin = async () => {
     const response = await login(mockUser, mockPassword);
 
     if(response.success) {
-      console.log('login realizado com sucesso');
+      loadLoggedUser();
     } else {
       console.error(response.error);
     }
@@ -26,14 +29,5 @@ export const useLogin = () => {
     }
   }
 
-  const handleUser = async () => {
-    const response = await getUser(mockUser)
-    if(response.success) {
-      console.log(response.value);
-    } else {
-      console.error(response.error);
-    }
-  }
-
-  return { handleLogin, handlePosts, handleUser }
+  return { handleLogin, handlePosts }
 }

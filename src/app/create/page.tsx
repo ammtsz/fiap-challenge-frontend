@@ -1,5 +1,9 @@
 const Create = () => {
-  return <h1>Create</h1>
+  return (
+    <main className="page">
+      <h1>Create</h1>
+    </main>
+  )
 };
 
 export default Create;

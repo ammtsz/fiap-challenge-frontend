@@ -1,6 +1,8 @@
 const Posts = () =>  {
   return (
-    <h1>Posts</h1>
+    <main className="page">
+      <h1>Posts</h1>
+    </main>
   );
 }
 

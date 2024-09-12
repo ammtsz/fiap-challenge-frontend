@@ -4,12 +4,11 @@ import { UserResponse } from './types';
 import { AxiosError } from 'axios';
 import { getErrorMessage } from '../utils/functions';
 
-export const getUser = async (email: string): Promise<Result<User>> => {
+export const getLoggedUser = async (): Promise<Result<User>> => {
   try {
-    const { data } = await api.get<UserResponse>('/user', { params: { email } });
-    if (data.password) delete data.password;
+    const { data } = await api.get<UserResponse>('/user/logged');
     
-    return { success: true, value: data}    
+    return { success: true, value: data}
   } catch (error) {
     const message = getErrorMessage((error as AxiosError).status);
     

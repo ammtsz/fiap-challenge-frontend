@@ -1,20 +1,33 @@
 "use client"
 
-import { Button } from "@/components"
+import { Button, LinkButton } from "@/components"
 import { useLogin } from "./hooks/useLogin";
 
 const Login = () => {
-  const { handleLogin, handlePosts, handleUser } = useLogin()
+  const { handleLogin, handlePosts } = useLogin()
 
   return (
-    <div className="page">
-      <h1 className="mb-12" >Login Page</h1>
+    <main className="page">
+      <h1 className="mb-12">Login Page</h1>
         <Button className="mb-2" handleClick={handleLogin} >Login</Button>
         <div className="flex gap-2">
-          <Button className="flex-grow" variation="secondary" handleClick={handlePosts} >Get Posts</Button>
-          <Button className="flex-grow" variation="danger" handleClick={handleUser} >Get User</Button>
+          <LinkButton
+            href="/signup"
+            className="flex-grow"
+            variation="danger"
+            handleClick={handleLogin}
+          >
+            Registrar-se
+          </LinkButton>
+          <Button
+            className="flex-grow"
+            variation="secondary"
+            handleClick={handlePosts}
+          >
+            Get Posts
+          </Button>
         </div>
-    </div>
+    </main>
   )
 };
 
