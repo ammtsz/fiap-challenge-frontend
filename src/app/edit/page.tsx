@@ -1,7 +1,10 @@
+import { Divider, PageTitle } from "@/components";
+
 const Edit = () => {
   return (
     <main className="page">
-      <h1>Edit</h1>
+      <PageTitle title="Editar Postagem"/>
+      <Divider />
     </main>
   )
 };

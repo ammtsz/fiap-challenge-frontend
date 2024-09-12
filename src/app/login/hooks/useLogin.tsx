@@ -1,7 +1,6 @@
 
 import { login }  from "@/api/auth"
-import { usePostsContext } from "@/contexts/posts";
-import { useUserContext } from "@/contexts/user";
+import { usePostsContext, useUserContext } from "@/contexts";
 import { useRouter } from 'next/navigation';
 
 const mockUser = 'teacher@mail.com'

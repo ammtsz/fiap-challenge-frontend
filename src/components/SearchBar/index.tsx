@@ -1,6 +1,6 @@
 "use client"
 
-import { usePostsContext } from "@/contexts/posts"
+import { usePostsContext } from "@/contexts"
 import { Search as SearchIcon } from "react-feather"
 
 interface SearchBarProps extends React.ComponentProps<'input'>{

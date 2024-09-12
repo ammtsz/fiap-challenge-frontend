@@ -1,5 +1,6 @@
 "use client"
 
+import { Divider, PageTitle } from '@/components';
 import { useParams } from 'next/navigation';
 
 export const Post = () => {
@@ -8,7 +9,9 @@ export const Post = () => {
 
   return (
     <main className="page">
-      <h1>Post ID: {id}</h1>;
+      <PageTitle title="Leitura de Postagem"/>
+      <Divider />
+      <div>Post ID: {id}</div>;
     </main>
   )
 }

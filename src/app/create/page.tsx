@@ -1,7 +1,10 @@
+import { Divider, PageTitle } from "@/components";
+
 const Create = () => {
   return (
     <main className="page">
-      <h1>Create</h1>
+      <PageTitle title="Nova Postagem"/>
+      <Divider />
     </main>
   )
 };

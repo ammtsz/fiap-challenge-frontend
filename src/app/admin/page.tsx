@@ -1,10 +1,11 @@
-import { SearchBar } from "@/components/SearchBar";
+import { Divider, PageTitle, SearchBar } from "@/components";
 
 const Admin = () => {
   return (
     <main className="page">
-      <h1>Admin</h1>
-      <SearchBar />
+      <PageTitle title="Administração de Postagens"/>
+      <Divider />
+      <SearchBar className="block md:hidden"/>
     </main>
   )
 };

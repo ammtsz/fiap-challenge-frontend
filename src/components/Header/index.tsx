@@ -1,7 +1,7 @@
 "use client"
 
 import { useUserContext } from "@/contexts/user";
-import { SearchBar } from "@/components/SearchBar";
+import { SearchBar } from "@/components";
 import { Greeting } from "./Greeting";
 import { LoginLogout } from "./LoginLogout";
 import { usePathname } from 'next/navigation';

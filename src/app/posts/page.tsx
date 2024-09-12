@@ -1,7 +1,7 @@
 "use client"
 
-import { SearchBar } from "@/components/SearchBar";
-import { usePostsContext } from "@/contexts/posts";
+import { SearchBar, PageTitle, Divider } from "@/components";
+import { usePostsContext } from "@/contexts";
 import { formatDate, formatTime } from "@/utils/dateAndTime";
 
 const Posts = () =>  {
@@ -9,8 +9,10 @@ const Posts = () =>  {
 
   return (
     <main className="page">
-      <h1>Posts</h1>
-      <SearchBar className="block md:hidden" />
+      <PageTitle title="Lista de Posts"/>
+      <Divider />
+      <SearchBar className="block md:hidden"/>
+      
       {posts.map(post => {
         return (
           <div key={post.id} className="flex flex-col mb-8">
