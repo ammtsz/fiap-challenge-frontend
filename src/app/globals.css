@@ -38,10 +38,8 @@ body {
   font-family: var(--font-inter), Arial, Helvetica, sans-serif;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+*:focus {
+  outline-color: var(--primary);
 }
 
 .page {
@@ -89,4 +87,29 @@ body {
   bg-danger
   text-white
   hover:bg-danger_hover
+}
+
+.input {
+  @apply
+  w-full
+  h-11
+  min-h-11
+  rounded-lg
+  border-primary
+  border-2
+  bg-white
+  px-4
+  flex
+  items-center
+  text-primary
+  font-normal
+}
+
+input[type="search"] {
+  padding-right: 24px;
+  
+  &:focus::-webkit-search-cancel-button {
+    margin-right: 1rem;
+    margin-left: 0.5rem;
+  };
 }

@@ -1,33 +1,28 @@
 
 import { login }  from "@/api/auth"
-import { getPosts } from "@/api/posts";
+import { usePostsContext } from "@/contexts/posts";
 import { useUserContext } from "@/contexts/user";
-
+import { useRouter } from 'next/navigation';
 
 const mockUser = 'teacher@mail.com'
 const mockPassword = '123'
 
 export const useLogin = () => {
   const { loadLoggedUser } = useUserContext();
+  const { searchPosts } = usePostsContext();
+  const router = useRouter();
 
   const handleLogin = async () => {
     const response = await login(mockUser, mockPassword);
 
     if(response.success) {
       loadLoggedUser();
+      searchPosts();
+      router.push('/');
     } else {
       console.error(response.error);
     }
   }
 
-  const handlePosts = async () => {
-    const response = await getPosts()
-    if(response.success) {
-      console.log(response.value);
-    } else {
-      console.error(response.error);
-    }
-  }
-
-  return { handleLogin, handlePosts }
+  return { handleLogin }
 }

@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Header } from "@/components";
 import { UserProvider } from "@/contexts/user";
+import { PostsProvider } from "@/contexts/posts";
 
 const inter = localFont({
   src: "../fonts/Inter.woff2",
@@ -26,8 +27,10 @@ export default function RootLayout({
         className={`${inter.variable} bg-[var(--background)]`}
       >
         <UserProvider>
-          <Header />
-          {children}
+          <PostsProvider>
+            <Header />
+            {children}
+          </PostsProvider>
         </UserProvider>
       </body>
     </html>

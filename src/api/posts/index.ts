@@ -5,9 +5,9 @@ import { getErrorMessage } from '../utils/functions';
 import { PostResponse } from './types';
 import { mapPosts } from './utils';
 
-export const getPosts = async (): Promise<Result<Post[]>> => {
+export const filterPosts = async (term = '' ): Promise<Result<Post[]>> => {
   try {
-    const { data } = await api.get<PostResponse[]>('/posts');
+    const { data } = await api.get<PostResponse[]>('/posts/search', { params: { term } });
 
     return { success: true, value: mapPosts(data)}    
   } catch (error) {
