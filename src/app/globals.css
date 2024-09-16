@@ -39,7 +39,7 @@ body {
 }
 
 *:focus {
-  outline-color: var(--primary);
+  outline-color: var(--primary_hover);
 }
 
 .page-container {
@@ -100,7 +100,7 @@ body {
   min-h-11
   rounded-lg
   border-primary
-  border-2
+  border-[1px]
   bg-white
   px-4
   flex
