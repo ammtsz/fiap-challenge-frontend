@@ -10,7 +10,7 @@ const Login = () => {
   return (
     <PageContainer>
       <Span className='block text-center font-bold mb-5'>
-        <h1>Faça o login ou registre-se para continuar.</h1>
+        Faça o login ou registre-se para continuar.
       </Span>
       <Card>
         <form className='space-y-4 w-full max-w-md'>
