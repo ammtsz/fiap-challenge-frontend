@@ -1,41 +1,31 @@
 'use client'
 
-import { Button, PageContainer } from '@/components'
+import { Button, PageContainer, Span } from '@/components'
 import { useLogin } from './hooks/useLogin'
-import { Card } from '@/components/Card/Card'
-
+import { Input } from '@/components'
+import { Card } from '@/components'
 const Login = () => {
   const { handleLogin } = useLogin()
-  const fields = [
-    {
-      id: 'login',
-      label: 'E-mail:',
-      type: 'text',
-      placeholder: 'Digite o seu e-mail...',
-    },
-    {
-      id: 'password',
-      label: 'Senha:',
-      type: 'password',
-      placeholder: 'Digite a sua senha...',
-    },
-  ]
-  const spans = [
-    {
-      id: 'span1',
-      text: 'Não possui uma conta? Registre-se.',
-      className: 'text-black-500 block text-center pt-4',
-      href: '/signup',
-    },
-  ]
 
   return (
     <PageContainer>
-      <span className='block text-center font-bold mb-5'>Faça o login ou registre-se para continuar.</span>
-      <Card
-        fields={fields}
-        spans={spans}
-        ButtonComponent={() => (
+      <Span className='block text-center font-bold mb-5'>
+        <h1>Faça o login ou registre-se para continuar.</h1>
+      </Span>
+      <Card>
+        <form className='space-y-4 w-full max-w-md'>
+          <Input
+            id='login'
+            label='E-mail:'
+            type='text'
+            placeholder='Digite o seu e-mail...'
+          />
+          <Input
+            id='password'
+            label='Senha:'
+            type='password'
+            placeholder='Digite a sua senha...'
+          />
           <Button
             {...{
               handleClick: handleLogin,
@@ -43,8 +33,14 @@ const Login = () => {
               children: 'Entrar',
             }}
           />
-        )}
-      />
+          <Span className='block text-center'>
+            Não possui uma conta?{' '}
+            <a href='/signup' className='text-blue-500 underline'>
+              Registre-se.
+            </a>
+          </Span>
+        </form>
+      </Card>
     </PageContainer>
   )
 }
