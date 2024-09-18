@@ -1,6 +1,6 @@
 'use client'
 
-import { Button, PageContainer, Span } from '@/components'
+import { Button, PageContainer } from '@/components'
 import { useLogin } from './hooks/useLogin'
 import { Input } from '@/components'
 import { Card } from '@/components'
@@ -9,9 +9,9 @@ const Login = () => {
 
   return (
     <PageContainer>
-      <Span className='block text-center font-bold mb-5'>
+      <p className='block text-center font-bold mb-5'>
         Faça o login ou registre-se para continuar.
-      </Span>
+      </p>
       <Card>
         <form className='space-y-4 w-full max-w-md'>
           <Input
@@ -27,18 +27,19 @@ const Login = () => {
             placeholder='Digite a sua senha...'
           />
           <Button
-            {...{
-              handleClick: handleLogin,
-              className: 'bg-primary text-white w-full p-2 rounded-md',
-              children: 'Entrar',
-            }}
-          />
-          <Span className='block text-center'>
-            Não possui uma conta?{' '}
-            <a href='/signup' className='text-blue-500 underline'>
-              Registre-se.
-            </a>
-          </Span>
+            handleClick={handleLogin}
+            className='bg-primary text-white w-full p-2 rounded-md'
+          >
+            Entrar
+          </Button>
+          <p className='block text-center'>
+            Não possui uma conta?
+            <span>
+              <a href='/signup' className='text-blue-500 underline pl-1'>
+                Registre-se.
+              </a>
+            </span>
+          </p>
         </form>
       </Card>
     </PageContainer>
