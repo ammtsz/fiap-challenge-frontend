@@ -1,14 +1,22 @@
-"use client"
+'use client';
 
 import { getLoggedUser } from '@/api/user';
 import { User } from '@/types';
-import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
+import React, {
+  createContext,
+  useState,
+  useContext,
+  ReactNode,
+  useLayoutEffect,
+  useCallback,
+} from 'react';
+import { useRouter } from 'next/navigation';
 
 const INITIAL_STATE: User = {
   email: '',
   username: '',
   role: 'student',
-}
+};
 
 interface UserContextProps {
   user: User;
@@ -18,26 +26,30 @@ interface UserContextProps {
 
 const UserContext = createContext<UserContextProps | undefined>(undefined);
 
-export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const UserProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
   const [user, setUser] = useState<User>(INITIAL_STATE);
+  const router = useRouter();
 
   const resetUser = () => {
     setUser(INITIAL_STATE);
-  }
+  };
 
-  const loadLoggedUser = async () => {
+  const loadLoggedUser = useCallback(async () => {
     const response = await getLoggedUser();
-    if(response.success) {
+    if (response.success) {
       setUser(response.value);
     } else {
       console.error(response.error);
       setUser(INITIAL_STATE);
+      router.push('/login');
     }
-  };
+  }, [router]);
 
-  useEffect(() => {
-    loadLoggedUser()
-  }, [])
+  useLayoutEffect(() => {
+    loadLoggedUser();
+  }, [loadLoggedUser]);
 
   return (
     <UserContext.Provider value={{ user, loadLoggedUser, resetUser }}>

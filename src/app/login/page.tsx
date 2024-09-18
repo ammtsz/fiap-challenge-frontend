@@ -1,11 +1,11 @@
-'use client'
+'use client';
 
-import { Button, PageContainer } from '@/components'
-import { useLogin } from './hooks/useLogin'
-import { Input } from '@/components'
-import { Card } from '@/components'
+import { Button, PageContainer } from '@/components';
+import { useLogin } from './hooks/useLogin';
+import { Input } from '@/components';
+import { Card } from '@/components';
 const Login = () => {
-  const { handleLogin } = useLogin()
+  const { handleLogin, email, password, setEmail, setPassword } = useLogin();
 
   return (
     <PageContainer>
@@ -13,22 +13,26 @@ const Login = () => {
         Faça o login ou registre-se para continuar.
       </p>
       <Card>
-        <form className='space-y-4 w-full max-w-md'>
+        <form className='space-y-4 w-full max-w-md' onSubmit={handleLogin}>
           <Input
             id='login'
             label='E-mail:'
             type='text'
             placeholder='Digite o seu e-mail...'
+            value={email}
+            handleChange={setEmail}
           />
           <Input
             id='password'
             label='Senha:'
             type='password'
             placeholder='Digite a sua senha...'
+            value={password}
+            handleChange={setPassword}
           />
           <Button
-            handleClick={handleLogin}
             className='bg-primary text-white w-full p-2 rounded-md'
+            type='submit'
           >
             Entrar
           </Button>
@@ -43,7 +47,7 @@ const Login = () => {
         </form>
       </Card>
     </PageContainer>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
