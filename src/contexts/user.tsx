@@ -10,17 +10,17 @@ import React, {
   useLayoutEffect,
   useCallback,
 } from 'react';
-import { useRouter } from 'next/navigation';
 
 const INITIAL_STATE: User = {
   email: '',
   username: '',
-  role: 'student',
+  role: null,
 };
 
 interface UserContextProps {
   user: User;
-  loadLoggedUser: () => void;
+  isLoading: boolean;
+  loadLoggedUser: () => Promise<void>;
   resetUser: () => void;
 }
 
@@ -30,29 +30,33 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [user, setUser] = useState<User>(INITIAL_STATE);
-  const router = useRouter();
+  const [isLoading, setLoading] = useState<boolean>(false);
 
   const resetUser = () => {
     setUser(INITIAL_STATE);
   };
 
   const loadLoggedUser = useCallback(async () => {
+    setLoading(true);
     const response = await getLoggedUser();
+
     if (response.success) {
       setUser(response.value);
     } else {
       console.error(response.error);
       setUser(INITIAL_STATE);
-      router.push('/login');
     }
-  }, [router]);
+    setLoading(false);
+  }, []);
 
   useLayoutEffect(() => {
     loadLoggedUser();
   }, [loadLoggedUser]);
 
   return (
-    <UserContext.Provider value={{ user, loadLoggedUser, resetUser }}>
+    <UserContext.Provider
+      value={{ user, isLoading, loadLoggedUser, resetUser }}
+    >
       {children}
     </UserContext.Provider>
   );

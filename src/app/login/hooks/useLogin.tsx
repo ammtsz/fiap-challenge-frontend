@@ -19,7 +19,7 @@ export const useLogin = () => {
     const response = await login(email, password);
 
     if (response.success) {
-      loadLoggedUser();
+      await loadLoggedUser();
       searchPosts();
       router.push('/');
     } else {
@@ -27,5 +27,11 @@ export const useLogin = () => {
     }
   };
 
-  return { email, password, handleLogin, setEmail, setPassword };
+  return {
+    email,
+    password,
+    handleLogin,
+    setEmail,
+    setPassword,
+  };
 };

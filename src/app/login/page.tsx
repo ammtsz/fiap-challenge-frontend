@@ -1,9 +1,11 @@
 'use client';
 
-import { Button, PageContainer } from '@/components';
+import { Button, PageContainer, withAuth } from '@/components';
 import { useLogin } from './hooks/useLogin';
 import { Input } from '@/components';
 import { Card } from '@/components';
+import Link from 'next/link';
+
 const Login = () => {
   const { handleLogin, email, password, setEmail, setPassword } = useLogin();
 
@@ -39,9 +41,9 @@ const Login = () => {
           <p className='block text-center'>
             Não possui uma conta?
             <span>
-              <a href='/signup' className='text-blue-500 underline pl-1'>
+              <Link href='/signup' className='text-blue-500 underline pl-1'>
                 Registre-se.
-              </a>
+              </Link>
             </span>
           </p>
         </form>
@@ -50,4 +52,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default withAuth(Login, []);
