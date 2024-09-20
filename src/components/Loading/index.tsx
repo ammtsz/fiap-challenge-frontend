@@ -8,10 +8,10 @@ interface LoadingProps extends React.ComponentProps<'div'> {
 export const Loading: React.FC<LoadingProps> = ({
   className,
   message,
-  ...rest
+  ...props
 }) => {
   return (
-    <div className={`text-center mt-[30vh] font-inter ${className}`} {...rest}>
+    <div className={`text-center mt-[30vh] font-inter ${className}`} {...props}>
       <Spinner />
       <h1 className='text-xl mt-4'>{message || 'Carregando...'}</h1>
     </div>

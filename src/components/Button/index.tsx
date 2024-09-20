@@ -12,7 +12,7 @@ export const Button: React.FC<ButtonProps> = ({
   className,
   children,
   variation = 'primary',
-  ...rest
+  ...props
 }) => {
   const handleClick = () => {
     onClick && onClick();
@@ -22,7 +22,7 @@ export const Button: React.FC<ButtonProps> = ({
     <button
       onClick={handleClick}
       className={`${variation}_btn ${className}`}
-      {...rest}
+      {...props}
     >
       {children}
     </button>

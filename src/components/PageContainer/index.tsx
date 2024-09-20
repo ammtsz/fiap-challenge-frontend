@@ -1,15 +1,16 @@
-interface PageContainerProps extends React.ComponentProps<'main'>{
+interface PageContainerProps extends React.ComponentProps<'main'> {
   children: React.ReactNode;
-};
+}
 
-export const PageContainer: React.FC<PageContainerProps> = ({ children, ...rest }) => {
+export const PageContainer: React.FC<PageContainerProps> = ({
+  children,
+  ...props
+}) => {
   return (
-    <main className="page-container" {...rest}>
-      <div className="page">
-        <>
-          {children}
-        </>
+    <main className='page-container' {...props}>
+      <div className='page'>
+        <>{children}</>
       </div>
     </main>
-  )
-}
+  );
+};

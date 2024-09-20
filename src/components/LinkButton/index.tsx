@@ -1,6 +1,6 @@
-"use client"
+'use client';
 
-import Link, { LinkProps } from 'next/link'
+import Link, { LinkProps } from 'next/link';
 
 interface LinkButtonProps extends LinkProps {
   className?: string;
@@ -12,14 +12,11 @@ export const LinkButton: React.FC<LinkButtonProps> = ({
   className,
   children,
   variation = 'primary',
-  ...rest
+  ...props
 }) => {
   return (
-      <Link
-        className={`${variation}_btn ${className}`}
-        {...rest}
-      >
-        {children}
-      </Link>
-  )
+    <Link className={`${variation}_btn ${className}`} {...props}>
+      {children}
+    </Link>
+  );
 };

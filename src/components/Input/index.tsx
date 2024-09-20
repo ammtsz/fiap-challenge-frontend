@@ -1,4 +1,4 @@
-interface InputProps extends React.ComponentProps<"input"> {
+interface InputProps extends React.ComponentProps<'input'> {
   className?: string;
   label?: string;
   type?: string;
@@ -15,7 +15,7 @@ export const Input: React.FC<InputProps> = ({
   placeholder,
   value,
   handleChange,
-  ...rest
+  ...props
 }) => {
   const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     handleChange && handleChange(e.target.value);
@@ -24,7 +24,7 @@ export const Input: React.FC<InputProps> = ({
   return (
     <div className={`flex flex-col ${className}`}>
       {label && (
-        <label className="mb-1" htmlFor={id}>
+        <label className='mb-1' htmlFor={id}>
           {label}
         </label>
       )}
@@ -32,11 +32,11 @@ export const Input: React.FC<InputProps> = ({
         id={id}
         name={id}
         type={type}
-        className="input"
+        className='input'
         placeholder={placeholder}
         value={value}
         onChange={handleInputChange}
-        {...rest}
+        {...props}
       />
     </div>
   );

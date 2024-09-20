@@ -16,10 +16,10 @@ export const Feedback: React.FC<FeedbackProps> = ({
   buttonMessage,
   href,
   className,
-  ...rest
+  ...props
 }) => {
   return (
-    <div className={`text-center mt-[30vh] font-inter ${className}`} {...rest}>
+    <div className={`text-center mt-[30vh] font-inter ${className}`} {...props}>
       {title && <h1 className='font-bold'>{title}</h1>}
       {description && <p>{description}</p>}
       {buttonMessage && href && (
