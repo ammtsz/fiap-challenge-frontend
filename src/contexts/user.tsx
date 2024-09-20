@@ -1,46 +1,62 @@
-"use client"
+'use client';
 
 import { getLoggedUser } from '@/api/user';
 import { User } from '@/types';
-import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
+import React, {
+  createContext,
+  useState,
+  useContext,
+  ReactNode,
+  useLayoutEffect,
+  useCallback,
+} from 'react';
 
 const INITIAL_STATE: User = {
   email: '',
   username: '',
-  role: 'student',
-}
+  role: null,
+};
 
 interface UserContextProps {
   user: User;
-  loadLoggedUser: () => void;
+  isLoading: boolean;
+  loadLoggedUser: () => Promise<void>;
   resetUser: () => void;
 }
 
 const UserContext = createContext<UserContextProps | undefined>(undefined);
 
-export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const UserProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
   const [user, setUser] = useState<User>(INITIAL_STATE);
+  const [isLoading, setLoading] = useState<boolean>(false);
 
   const resetUser = () => {
     setUser(INITIAL_STATE);
-  }
+  };
 
-  const loadLoggedUser = async () => {
+  const loadLoggedUser = useCallback(async () => {
+    setLoading(true);
     const response = await getLoggedUser();
-    if(response.success) {
+
+    if (response.success) {
       setUser(response.value);
     } else {
       console.error(response.error);
       setUser(INITIAL_STATE);
     }
-  };
+    setLoading(false);
+  }, []);
 
-  useEffect(() => {
-    loadLoggedUser()
-  }, [])
+  useLayoutEffect(() => {
+    loadLoggedUser();
+  }, [loadLoggedUser]);
 
   return (
-    <UserContext.Provider value={{ user, loadLoggedUser, resetUser }}>
+    <UserContext.Provider
+      value={{ user, isLoading, loadLoggedUser, resetUser }}
+    >
       {children}
     </UserContext.Provider>
   );

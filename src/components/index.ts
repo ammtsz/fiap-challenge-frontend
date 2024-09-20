@@ -7,3 +7,8 @@ export { PageTitle } from './PageTitle'
 export { PageContainer } from './PageContainer'
 export { Input } from './Input'
 export { Card } from './Card'
+export { Feedback } from './Feedback'
+export { Loading } from './Loading'
+export { Spinner } from './Spinner'
+
+export { withAuth } from './withAuth'

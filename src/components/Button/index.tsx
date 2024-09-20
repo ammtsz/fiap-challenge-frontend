@@ -1,28 +1,30 @@
-"use client"
+'use client';
 
 interface ButtonProps extends React.ComponentProps<'button'> {
-  handleClick: () => void;
+  onClick?: () => void;
   className?: string;
   variation?: 'primary' | 'secondary' | 'danger';
   children: React.ReactNode;
 }
 
 export const Button: React.FC<ButtonProps> = ({
-  handleClick,
+  onClick,
   className,
   children,
   variation = 'primary',
   ...rest
 }) => {
+  const handleClick = () => {
+    onClick && onClick();
+  };
 
-  const onClick = () => handleClick();
   return (
-      <button
-        onClick={onClick}
-        className={`${variation}_btn ${className}`}
-        {...rest}
-      >
-        {children}
-      </button>
-  )
+    <button
+      onClick={handleClick}
+      className={`${variation}_btn ${className}`}
+      {...rest}
+    >
+      {children}
+    </button>
+  );
 };

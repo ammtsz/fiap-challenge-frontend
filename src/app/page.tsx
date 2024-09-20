@@ -1,7 +1,15 @@
-import PostsPage from './posts/page';
+'use client';
 
-export default function Home() {
-  return (
-    <PostsPage />
-  );
+import PostsPage from './posts/page';
+import LoginPage from './login/page';
+import { useUserContext } from '@/contexts';
+
+function Home() {
+  const {
+    user: { email },
+  } = useUserContext();
+
+  return email ? <PostsPage /> : <LoginPage />;
 }
+
+export default Home;

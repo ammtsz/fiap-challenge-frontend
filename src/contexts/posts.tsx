@@ -1,24 +1,27 @@
-"use client"
+'use client';
 
 import { filterPosts } from '@/api/posts';
 import { Post } from '@/types';
 import { debounce } from '@/utils/debounce';
-import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
+import React, { createContext, useState, useContext, ReactNode } from 'react';
 
 interface PostsContextProps {
   posts: Post[];
   searchPosts: (term?: string) => void;
+  loadPosts: () => void;
 }
 
 const PostsContext = createContext<PostsContextProps | undefined>(undefined);
 
-export const PostsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const PostsProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
   const [posts, setPosts] = useState<Post[]>([]);
 
   const loadPosts = async (term = '') => {
     const response = await filterPosts(term);
-    
-    if(response.success) {
+
+    if (response.success) {
       setPosts(response.value);
     } else {
       console.error(response.error);
@@ -27,12 +30,8 @@ export const PostsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 
   const searchPosts = debounce(loadPosts, 600);
 
-  useEffect(() => {
-    loadPosts()
-  }, [])
-
   return (
-    <PostsContext.Provider value={{ posts, searchPosts }}>
+    <PostsContext.Provider value={{ posts, searchPosts, loadPosts }}>
       {children}
     </PostsContext.Provider>
   );
