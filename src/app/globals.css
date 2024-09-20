@@ -43,7 +43,7 @@ body {
 }
 
 .page-container {
-  @apply flex justify-center content-height font-inter w-full;
+  @apply px-8 flex justify-center content-height font-inter w-full;
 }
 
 .page {
@@ -53,8 +53,6 @@ body {
 .btn {
   @apply
   transition-all
-  justify-center
-  items-center
   rounded-lg
   py-1.5
   px-5

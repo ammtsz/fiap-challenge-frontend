@@ -24,7 +24,7 @@ export const Feedback: React.FC<FeedbackProps> = ({
       {description && <p>{description}</p>}
       {buttonMessage && href && (
         <LinkButton
-          className='m-auto w-min mt-4 text-nowrap'
+          className='m-auto w-min mt-4 text-nowrap flex'
           variation='secondary'
           href={href}
         >

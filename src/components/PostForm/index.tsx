@@ -8,7 +8,7 @@ interface PostFormProps extends React.ComponentProps<'form'> {
 
 export const PostForm: React.FC<PostFormProps> = ({ id }) => {
   return (
-    <form className='font-inter space-y-8 w-full'>
+    <form className='font-inter space-y-4 sm:space-y-8 w-full'>
       <Input
         id='author'
         label={{
@@ -49,22 +49,18 @@ export const PostForm: React.FC<PostFormProps> = ({ id }) => {
       />
       <div className='flex flex-col md:flex-row-reverse gap-2 w-full'>
         <Button
-          className='mt-8 flex justify-end ml-auto w-full'
+          className='mt-4 ml-auto flex-grow sm:mt-8 sm:w-auto'
           variation='primary'
           type='submit'
         >
           {/* TODO: adicionar lógica para mostrar o texto correto */}
           Publicar/Salvar
         </Button>
-        <Button
-          className='md:mt-8 flex justify-end ml-auto w-full'
-          variation='danger'
-          type='button'
-        >
+        <Button className='md:mt-8 flex-grow' variation='danger' type='button'>
           Excluir
         </Button>
         <Button
-          className='md:mt-8 flex justify-end ml-auto w-full'
+          className='md:mt-8 flex-grow'
           variation='tertiary'
           type='button'
         >
