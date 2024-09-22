@@ -1,13 +1,16 @@
-'use client'
-import React from 'react'
+'use client';
+import React from 'react';
 interface CardProps extends React.ComponentProps<'div'> {
-  children: React.ReactNode
+  children: React.ReactNode;
+  className?: string;
 }
 
-export const Card: React.FC<CardProps> = ({ children }) => {
+export const Card: React.FC<CardProps> = ({ className, children }) => {
   return (
-    <div className='container mx-auto p-4 bg-secondary border border-primary rounded-lg h-[500px] w-[1000px] flex items-center justify-center'>
+    <div
+      className={`w-full mx-auto p-6 bg-secondary border border-primary rounded-lg flex items-center justify-center ${className}`}
+    >
       {children}
     </div>
-  )
-}
+  );
+};

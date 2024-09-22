@@ -1,33 +1,33 @@
 import { Label } from '@/components';
 
-interface InputProps extends React.ComponentProps<'input'> {
+interface TextAreaProps extends React.ComponentProps<'textarea'> {
+  id: string;
   className?: string;
-  label: {
+  label?: {
     text: string;
     variation?: 'primary' | 'default';
   };
-  type?: string;
-  id: string;
   placeholder?: string;
 }
 
-export const Input: React.FC<InputProps> = ({
+export const TextArea: React.FC<TextAreaProps> = ({
   id,
-  type,
   className,
   label,
   placeholder,
   value,
+  onChange,
   ...props
 }) => {
   return (
     <div className={`flex flex-col w-full ${className}`}>
-      {label && <Label variation={label.variation}>{label.text}</Label>}
-      <input
+      {label && (
+        <Label variation={label.variation || 'default'}>{label.text}</Label>
+      )}
+      <textarea
         id={id}
         name={id}
-        type={type}
-        className='input'
+        className='input p-2'
         placeholder={placeholder}
         value={value}
         {...props}

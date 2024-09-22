@@ -43,7 +43,7 @@ body {
 }
 
 .page-container {
-  @apply flex justify-center content-height font-inter w-full;
+  @apply px-8 flex justify-center content-height font-inter w-full;
 }
 
 .page {
@@ -53,21 +53,21 @@ body {
 .btn {
   @apply
   transition-all
-  flex
-  justify-center
-  items-center
   rounded-lg
   py-1.5
   px-5
   text-lg
   text-center
-  font-bold
   font-inter
+  text-ellipsis
+  overflow-hidden
+  text-nowrap
 }
 
 .primary_btn {
   @apply
   btn
+  font-bold
   text-white
   bg-primary
   hover:bg-primary_hover
@@ -76,11 +76,25 @@ body {
 .secondary_btn {
   @apply
   btn
+  font-bold
   border-2
   border-primary
   hover:border-primary_hover
   bg-white
   hover:bg-secondary
+  text-primary
+  hover:text-primary_hover
+}
+
+.tertiary_btn {
+  @apply
+  btn
+  font-normal
+  border
+  border-primary
+  hover:border-primary_hover
+  bg-white
+  hover:bg-background
   text-primary
   hover:text-primary_hover
 }
@@ -100,7 +114,7 @@ body {
   min-h-11
   rounded-lg
   border-primary
-  border-[1px]
+  border
   bg-white
   px-4
   flex
