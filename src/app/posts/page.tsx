@@ -33,7 +33,7 @@ const Posts = () => {
               {formatDate(post.date)} - Por {post.author} - às{' '}
               {formatTime(post.date)}
             </span>
-            <div className='flex flex-row-reverse text-justify'>
+            <div className='flex flex-col items-center md:flex-row-reverse text-justify'>
               <img
                 src='https://media.istockphoto.com/id/173015527/photo/a-single-red-book-on-a-white-surface.jpg?s=612x612&w=0&k=20&c=AeKmdZvg2_bRY2Yct7odWhZXav8CgDtLMc_5_pjSItY='
                 alt='imagem default'
