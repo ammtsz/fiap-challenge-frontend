@@ -10,5 +10,8 @@ export { Card } from './Card'
 export { Feedback } from './Feedback'
 export { Loading } from './Loading'
 export { Spinner } from './Spinner'
+export { Label } from './Label'
+export { TextArea } from './TextArea'
+export { PostForm } from './PostForm'
 
 export { withAuth } from './withAuth'

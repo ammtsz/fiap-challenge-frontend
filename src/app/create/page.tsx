@@ -1,6 +1,13 @@
 'use client';
 
-import { Divider, PageContainer, PageTitle, withAuth } from '@/components';
+import {
+  Card,
+  Divider,
+  PageContainer,
+  PageTitle,
+  PostForm,
+  withAuth,
+} from '@/components';
 import { ROLES } from '@/enums/role';
 
 const Create = () => {
@@ -8,6 +15,9 @@ const Create = () => {
     <PageContainer>
       <PageTitle title='Nova Postagem' />
       <Divider />
+      <Card className='xs:px-12 xs:py-8 mt-4'>
+        <PostForm />
+      </Card>
     </PageContainer>
   );
 };
