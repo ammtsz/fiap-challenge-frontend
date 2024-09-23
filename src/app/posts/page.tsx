@@ -13,17 +13,33 @@ import { ROLES } from "@/enums/role";
 import { formatDate, formatTime } from "@/utils/dateAndTime";
 import { useEffect } from "react";
 
+import { useRouter } from "next/navigation";
 const Posts = () => {
   const { posts, loadPosts } = usePostsContext();
   const { user } = useUserContext();
+  const router = useRouter();
   useEffect(() => {
     loadPosts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const handleCreatePost = () => {
+    router.push("/create");
+  };
+
   return (
     <PageContainer>
-      <PageTitle title="Lista de Posts" />
+      <div className="flex flex-col md:flex-row items-center justify-between mb-4">
+        <PageTitle title="Lista de Posts" />
+        <Button
+          className="bg-primary text-white h-12 w-1/3 p-2 rounded-md mt-4 mr-3"
+          type="submit"
+          onClick={handleCreatePost}
+        >
+          + Nova Postagem
+        </Button>
+      </div>
+
       <Divider />
       <SearchBar className="block md:hidden" />
       {posts.map((post) => {
@@ -51,13 +67,13 @@ const Posts = () => {
                 Continuar a leitura...
               </Button>
               {(user.role === ROLES.TEACHER || user.role === ROLES.ADMIN) && (
-                  <Button
-                    className="bg-secondary text-black h-12 w-1/3 p-2 rounded-md mt-4"
-                    type="submit"
-                  >
-                    Editar
-                  </Button>
-                )}
+                <Button
+                  className="bg-secondary text-black h-12 w-1/3 p-2 rounded-md mt-4"
+                  type="submit"
+                >
+                  Editar
+                </Button>
+              )}
             </div>
           </div>
         );
