@@ -23,10 +23,6 @@ const Posts = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleCreatePost = () => {
-    router.push("/create");
-  };
-
   return (
     <PageContainer>
       <div className="flex flex-col md:flex-row items-center justify-between mb-4">
@@ -34,8 +30,7 @@ const Posts = () => {
         {(user.role === ROLES.TEACHER || user.role === ROLES.ADMIN) && (
           <Button
             className="bg-primary text-white h-12 w-1/3 p-2 rounded-md mt-4 mr-3"
-            type="submit"
-            onClick={handleCreatePost}
+            onClick={() => router.push(`/create`)}
           >
             + Nova Postagem
           </Button>
@@ -63,15 +58,16 @@ const Posts = () => {
 
             <div className="flex flex-col md:flex-row">
               <Button
-                className="bg-primary text-white h-12 w-1/3 p-2 rounded-md mt-4 mr-3"
-                type="submit"
+                className="text-white h-12 w-1/3 p-2 rounded-md mt-4 mr-3"
+                onClick={() => router.push(`/posts/${post.id}`)}
               >
                 Continuar a leitura...
               </Button>
               {(user.role === ROLES.TEACHER || user.role === ROLES.ADMIN) && (
                 <Button
-                  className="bg-secondary text-black h-12 w-1/3 p-2 rounded-md mt-4"
-                  type="submit"
+                  variation="secondary"
+                  className="h-12 w-1/3 p-2 rounded-md mt-4"
+                  onClick={() => router.push(`/edit/${post.id}`)}
                 >
                   Editar Postagem
                 </Button>
