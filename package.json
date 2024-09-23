@@ -10,10 +10,12 @@
   },
   "dependencies": {
     "axios": "^1.7.7",
+    "formik": "^2.4.6",
     "next": "14.2.8",
     "react": "^18",
     "react-dom": "^18",
-    "react-feather": "^2.0.10"
+    "react-feather": "^2.0.10",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
