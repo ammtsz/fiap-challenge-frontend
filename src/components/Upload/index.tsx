@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Button } from '../Button';
 import { Label } from '../Label';
 import { Trash as TrashIcon } from 'react-feather';
@@ -11,6 +11,7 @@ interface UploadProps extends React.ComponentProps<'div'> {
   id: string;
   message: string;
   className?: string;
+  initialBase64?: string;
   label?: {
     text: string;
     variation?: 'primary' | 'default';
@@ -23,6 +24,7 @@ export const Upload: React.FC<UploadProps> = ({
   className,
   label,
   id,
+  initialBase64,
   handleUpload,
 }) => {
   const [base64, setBase64] = useState<string | null>(null);
@@ -50,7 +52,14 @@ export const Upload: React.FC<UploadProps> = ({
 
   const handleResetImage = () => {
     setBase64(null);
+    handleUpload && handleUpload('');
   };
+
+  useEffect(() => {
+    if (initialBase64) {
+      setBase64(initialBase64);
+    }
+  }, [initialBase64]);
 
   return (
     <div className={`w-full flex flex-col ${className}`}>
