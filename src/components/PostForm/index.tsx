@@ -1,79 +1,21 @@
 'use client';
 
-import { createPost, deletePost, getPostById, updatePost } from '@/api/posts';
 import { Button, Input, TextArea, Upload } from '@/components';
-import { useUserContext } from '@/contexts';
-import { PostData } from '@/types';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { usePostForm } from './hooks/usePostForm';
 
 interface PostFormProps extends React.ComponentProps<'form'> {
   id?: string;
 }
 
-const INITIAL_STATE: PostData = {
-  title: '',
-  image: '',
-  content: '',
-};
-
 export const PostForm: React.FC<PostFormProps> = ({ id }) => {
-  const [post, setPost] = useState<PostData>(INITIAL_STATE);
-
-  const { user } = useUserContext();
-  const router = useRouter();
-
-  const handleChange: React.ChangeEventHandler<
-    HTMLInputElement | HTMLTextAreaElement
-  > = (event) => {
-    const { value } = event.target;
-    setPost((prev) => ({ ...prev, [event.target.id]: value }));
-  };
-
-  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
-    event.preventDefault();
-    if (id) {
-      updatePost(id, { ...post, userId: user.id });
-    } else {
-      createPost({ ...post, userId: user.id });
-    }
-    setPost(INITIAL_STATE);
-    router.push('/');
-  };
-
-  const handleUpload = (base64String: string) => {
-    setPost((prev) => ({ ...prev, image: base64String }));
-  };
-
-  const loadPost = async (id: string) => {
-    const response = await getPostById(id);
-    if (response.success) {
-      setPost({
-        title: response.value.title,
-        content: response.value.content,
-        image: response.value.image,
-      });
-    } else {
-      console.error(response.error);
-    }
-  };
-
-  const handleDelete = async (id: string) => {
-    // TODO: adicionar modal de confirmação de exclusão
-    const response = await deletePost(id);
-    if (response.success) {
-      router.push('/');
-    } else {
-      // TODO: adicionar feedback de erro
-      console.error(response.error);
-    }
-  };
-
-  useEffect(() => {
-    if (id) {
-      loadPost(id);
-    }
-  }, [id]);
+  const {
+    post,
+    handleChange,
+    handleSubmit,
+    handleUpload,
+    handleDelete,
+    handleGoBack,
+  } = usePostForm(id);
 
   return (
     <form
@@ -132,7 +74,7 @@ export const PostForm: React.FC<PostFormProps> = ({ id }) => {
               className='md:mt-8 flex-grow'
               variation='tertiary'
               type='button'
-              onClick={() => router.back()}
+              onClick={handleGoBack}
             >
               Voltar
             </Button>
