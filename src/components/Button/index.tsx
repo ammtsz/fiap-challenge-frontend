@@ -3,7 +3,7 @@
 interface ButtonProps extends React.ComponentProps<'button'> {
   onClick?: () => void;
   className?: string;
-  variation?: 'primary' | 'secondary' | 'tertiary' | 'danger';
+  variation?: 'primary' | 'secondary' | 'tertiary' | 'danger' | 'ghost';
   children: React.ReactNode;
 }
 

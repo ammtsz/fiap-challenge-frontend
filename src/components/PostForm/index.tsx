@@ -1,7 +1,7 @@
 'use client';
 
 import { createPost, updatePost } from '@/api/posts';
-import { Button, Input, Label, TextArea } from '@/components';
+import { Button, Input, TextArea, Upload } from '@/components';
 import { useUserContext } from '@/contexts';
 import { PostData } from '@/types';
 import { useEffect, useState } from 'react';
@@ -39,11 +39,15 @@ export const PostForm: React.FC<PostFormProps> = ({ id }) => {
     // TODO: redirecionar para a página de postagens ou do post
   };
 
+  const handleUpload = (base64String: string) => {
+    setPost((prev) => ({ ...prev, image: base64String }));
+  };
+
   useEffect(() => {
     if (id) {
       // TODO: carregar dados do post
     }
-  }, []);
+  }, [id]);
 
   return (
     <form
@@ -71,20 +75,12 @@ export const PostForm: React.FC<PostFormProps> = ({ id }) => {
         value={post.content}
         onChange={handleChange}
       />
-      <div className='flex flex-col mt-8'>
-        <Label className='mr-4' variation='primary'>
-          Imagem
-        </Label>
-        <Button
-          id='image'
-          variation='tertiary'
-          className='max-w-full h-28'
-          aria-label='Clique para carregar uma imagem'
-          type='button'
-        >
-          Clique para carregar uma imagem
-        </Button>
-      </div>
+      <Upload
+        id='image'
+        message='Clique para carregar uma imagem'
+        label={{ text: 'Imagem', variation: 'primary' }}
+        handleUpload={handleUpload}
+      />
       <div className='flex flex-col md:flex-row-reverse gap-2 w-full'>
         <Button
           className={`mt-4 ml-auto sm:mt-8 sm:w-auto ${
