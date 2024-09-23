@@ -71,7 +71,7 @@ const Posts = () => {
                   className="bg-secondary text-black h-12 w-1/3 p-2 rounded-md mt-4"
                   type="submit"
                 >
-                  Editar
+                  Editar Postagem
                 </Button>
               )}
             </div>
