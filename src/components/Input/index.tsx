@@ -2,7 +2,7 @@ import { Label } from '@/components';
 
 interface InputProps extends React.ComponentProps<'input'> {
   className?: string;
-  label: {
+  label?: {
     text: string;
     variation?: 'primary' | 'default';
   };

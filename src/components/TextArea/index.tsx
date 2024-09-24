@@ -16,7 +16,6 @@ export const TextArea: React.FC<TextAreaProps> = ({
   label,
   placeholder,
   value,
-  onChange,
   ...props
 }) => {
   return (

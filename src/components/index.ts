@@ -13,5 +13,6 @@ export { Spinner } from './Spinner'
 export { Label } from './Label'
 export { TextArea } from './TextArea'
 export { PostForm } from './PostForm'
+export { Upload } from './Upload'
 
 export { withAuth } from './withAuth'

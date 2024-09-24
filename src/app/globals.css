@@ -99,6 +99,14 @@ body {
   hover:text-primary_hover
 }
 
+.ghost_btn {
+  @apply
+  btn
+  font-normal
+  text-primary
+  hover:text-primary_hover
+}
+
 .danger_btn {
   @apply
   btn

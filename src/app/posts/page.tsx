@@ -12,12 +12,15 @@ import { usePostsContext, useUserContext } from "@/contexts";
 import { ROLES } from "@/enums/role";
 import { formatDate, formatTime } from "@/utils/dateAndTime";
 import { useEffect } from "react";
-
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import defaultImage from "@/assets/book-default.svg";
+
 const Posts = () => {
   const { posts, loadPosts } = usePostsContext();
   const { user } = useUserContext();
   const router = useRouter();
+
   useEffect(() => {
     loadPosts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -43,16 +46,22 @@ const Posts = () => {
         return (
           <div key={post.id} className="flex flex-col mb-8 min-w-70">
             <h2 className="text-primary font-bold">{post.title}</h2>
-            <span className="font-normal text-[15px] leading-[18.15px]">
-              {formatDate(post.date)} - Por {post.author} - às{" "}
-              {formatTime(post.date)}
-            </span>
+            {post.date && (
+              <span className="font-normal text-[15px] leading-[18.15px]">
+                {formatDate(post.date)} - Por {post.author} - às{" "}
+                {formatTime(post.date)}
+              </span>
+            )}
             <div className="flex flex-col items-center md:flex-row-reverse text-justify">
-              <img
-                src="https://media.istockphoto.com/id/173015527/photo/a-single-red-book-on-a-white-surface.jpg?s=612x612&w=0&k=20&c=AeKmdZvg2_bRY2Yct7odWhZXav8CgDtLMc_5_pjSItY="
-                alt="imagem default"
-                className="ml-4 w-32 h-32 mr-4 border border-primary rounded-md "
-              />
+              <div className="flex ml-4 mr-4 border border-primary rounded-md min-w-[200px] min-h-[200px] bg-white">
+                <Image
+                  src={post.image || defaultImage}
+                  alt="Imagem da postagem"
+                  width={200}
+                  height={200}
+                  className="my-auto"
+                />
+              </div>
               <p className="text-justify">{post.content}</p>
             </div>
 
