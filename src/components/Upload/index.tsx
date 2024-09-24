@@ -6,6 +6,7 @@ import { Button } from '../Button';
 import { Label } from '../Label';
 import { Trash as TrashIcon } from 'react-feather';
 import { compressImage, convertToBase64 } from '@/utils/image';
+import { Toast, useToast } from '@/components';
 
 interface UploadProps extends React.ComponentProps<'div'> {
   id: string;
@@ -30,6 +31,7 @@ export const Upload: React.FC<UploadProps> = ({
   const [base64, setBase64] = useState<string | null>(null);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const { addToast, removeToast, toasts } = useToast();
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
@@ -42,8 +44,12 @@ export const Upload: React.FC<UploadProps> = ({
       const base64String = await convertToBase64(compressedFile);
       setBase64(base64String);
       handleUpload && handleUpload(base64String);
+    } else {
+      addToast({
+        message: 'Erro ao carregar a imagem. Tente novamente.',
+        type: 'error',
+      });
     }
-    // TODO: adicionar feedback para caso de erro
   };
 
   const onClick = (e: React.MouseEvent<HTMLInputElement>) => {
@@ -109,6 +115,7 @@ export const Upload: React.FC<UploadProps> = ({
           className='hidden'
         />
       </div>
+      <Toast removeToast={removeToast} toasts={toasts} />
     </div>
   );
 };
