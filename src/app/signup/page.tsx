@@ -6,11 +6,11 @@ import { useFormik } from 'formik';
 import { ErrorMessage } from '@/components/ErrorMessage';
 import Link from 'next/link';
 import * as Yup from 'yup';
-import api from '@/api/lib/axios';
 import { useRouter } from 'next/navigation';
+import { createUser } from '@/api/user';
 
 const Signup = () => {
-  
+
   const router = useRouter();
 
   const validationSchema = Yup.object().shape({
@@ -28,13 +28,12 @@ const Signup = () => {
     confirmPassword: string,
     role: string
   }) => {
-    try {
-      await api.post('/user', values);
-      alert('Usuário registrado com sucesso!');
+    const response = await createUser(values);
+    if (response.success) {
+      alert('Usuário criado com sucesso!');
       router.push('/');
-    } catch (error) {
-      alert(error)
-      return { success: false, value: error }
+    } else {
+      alert(response.error);
     }
   }
 
@@ -50,7 +49,6 @@ const Signup = () => {
     onSubmit: values => {
       console.log(JSON.stringify(values, null, 2));
       submitFormData(values);
-      formik.resetForm();
     }
   })
 
