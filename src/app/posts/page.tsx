@@ -44,9 +44,6 @@ const Posts = () => {
   const currentPosts = sortedPosts.slice(indexOfFirstPost, indexOfLastPost)
 
   // Converte a primeira letra da string para maiúscula.
-  const formatRole = (role: string | null) => {
-    return role ?  role.charAt(0).toUpperCase() + role.slice(1) : '';
-  }
 
   useEffect(() => {
     loadPosts()
@@ -80,7 +77,7 @@ const Posts = () => {
               <h2 className='text-primary font-bold'>{post.title}</h2>
               {post.date && (
                 <span className='font-normal text-[15px] leading-[18.15px]'>
-                  {formatDate(post.date)} - Por {formatRole(user.role)} {post.author}
+                  {formatDate(post.date)} - Por Professor {post.author}
                 </span>
               )}
               <div className='flex flex-col items-center md:flex-row-reverse text-justify'>
