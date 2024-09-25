@@ -27,16 +27,18 @@ const Posts = () => {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
+
+  // Ordena os posts por data de forma decrescente.
   const sortedPosts = posts.sort((a, b) => {
     const dateA = a.date ? new Date(a.date).getTime() : 0;
     const dateB = b.date ? new Date(b.date).getTime() : 0;
     return dateB - dateA;
   });
-  // Ordena os posts por data de forma decrescente.
-  const indexOfLastPost = currentPage * postsPerPage;
+
   // Calcula o índice do último post que deve ser exibido na página atual. 
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const indexOfLastPost = currentPage * postsPerPage;
   // Calcula o índice do primeiro post que deve ser exibido na página atual.
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
   
   const currentPosts = sortedPosts.slice(indexOfFirstPost, indexOfLastPost);
   // Array que contém os posts que devem ser exibidos na página atual.
