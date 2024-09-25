@@ -79,7 +79,6 @@ export const PostForm: React.FC<PostFormProps> = ({ id }) => {
               {id ? 'Salvar' : 'Publicar'}
             </Button>
             {id && (
-              <>
                 <Button
                   className='md:mt-8 flex-grow'
                   variation='danger'
@@ -88,16 +87,15 @@ export const PostForm: React.FC<PostFormProps> = ({ id }) => {
                 >
                   Excluir
                 </Button>
-                <Button
-                  className='md:mt-8 flex-grow'
+            )}
+            <Button
+                  className={`md:mt-8 ${id ? 'flex-grow' : 'auto'}`}
                   variation='tertiary'
                   type='button'
                   onClick={handleGoBack}
                 >
-                  Voltar
+                  {id ? 'Voltar' : 'Cancelar'}
                 </Button>
-              </>
-            )}
           </div>
         </form>
       ) : (

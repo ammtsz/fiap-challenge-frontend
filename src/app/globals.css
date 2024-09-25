@@ -43,11 +43,11 @@ body {
 }
 
 .page-container {
-  @apply px-8 flex justify-center content-height font-inter w-full;
+  @apply px-4 sm:px-8 flex justify-center content-height font-inter w-full;
 }
 
 .page {
-  @apply flex flex-col w-full h-full my-8 mx-8 xs:mx-16 sm:mx-24 md:mx-32 max-w-screen-lg;
+  @apply flex flex-col w-full h-full my-8 mx-4 xs:mx-16 sm:mx-20  lg:mx-32 max-w-screen-lg;
 }
 
 .btn {

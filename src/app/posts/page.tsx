@@ -7,6 +7,7 @@ import {
   PageContainer,
   withAuth,
   Button,
+  Feedback,
 } from '@/components'
 import { usePostsContext, useUserContext } from '@/contexts'
 import { ROLES } from '@/enums/role'
@@ -16,6 +17,7 @@ import { useRouter } from 'next/navigation'
 import PaginationComponent from '@/components/Pagination'
 import Image from 'next/image'
 import defaultImage from '@/assets/book-default.svg'
+import { Post } from '@/types'
 
 const Posts = () => {
   const { posts, loadPosts } = usePostsContext()
@@ -50,66 +52,82 @@ const Posts = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const renderImage = (post: Post, className: string) => (
+    <div
+      className={`flex border border-primary rounded-md min-w-[200px] min-h-[200px] bg-white content-center ${className}`}
+    >
+      <Image
+        src={post.image || defaultImage}
+        alt='Imagem da postagem'
+        width={200}
+        height={200}
+        className='my-auto rounded-md p-[1px]'
+      />
+    </div>
+  )
+
   return (
     <PageContainer>
-      <div className='flex flex-col md:flex-row items-center justify-between mb-4'>
+      <div className='flex flex-row md:items-center justify-between'>
         <PageTitle title='Lista de Posts' />
         {(user.role === ROLES.TEACHER || user.role === ROLES.ADMIN) && (
           <Button
-            className='bg-primary text-white h-12 w-1/3 p-2 rounded-md mt-4 mr-3'
+            className='mb-6 flex justify-center'
             onClick={() => router.push(`/create`)}
+            aria-label='Criar nova postagem'
           >
-            + Nova Postagem
+            + <span className='hidden md:block ml-1'>Nova</span>
+            <span className='hidden sm:block ml-2'>Postagem</span>
           </Button>
         )}
       </div>
-
       <Divider />
-      <SearchBar className='block md:hidden' />
+      <SearchBar className='block md:hidden mb-8' />
       {currentPosts.length === 0 ? (
-        <div className='text-center text-gray-500 mb-5'>
-          Não existem postagens.
-        </div>
+        <Feedback
+          title='Ops!'
+          description='Nenhum conteúdo encontrado'
+          className='mt-[50px] mb-[80px]'
+        />
       ) : (
         currentPosts.map((post) => {
           return (
-            <div key={post.id} className='flex flex-col mb-8 min-w-70'>
-              <h2 className='text-primary font-bold'>{post.title}</h2>
-              {post.date && (
-                <span className='font-normal text-[15px] leading-[18.15px]'>
-                  {formatDate(post.date)} - Por Professor(a) {post.author}
-                </span>
-              )}
-              <div className='flex flex-col items-center md:flex-row-reverse text-justify'>
-                <div className='flex ml-4 mr-4 border border-primary rounded-md min-w-[200px] min-h-[200px] bg-white'>
-                  <Image
-                    src={post.image || defaultImage}
-                    alt='Imagem da postagem'
-                    width={200}
-                    height={200}
-                    className='my-auto'
-                  />
-                </div>
-                <p className='text-justify'>{post.content}</p>
-              </div>
-
-              <div className='flex flex-col md:flex-row'>
-                <Button
-                  className='text-white h-12 w-1/3 p-2 rounded-md mt-4 mr-3'
-                  onClick={() => router.push(`/posts/${post.id}`)}
-                >
-                  Continuar a leitura...
-                </Button>
-                {(user.role === ROLES.TEACHER || user.role === ROLES.ADMIN) && (
-                  <Button
-                    variation='secondary'
-                    className='h-12 w-1/3 p-2 rounded-md mt-4'
-                    onClick={() => router.push(`/edit/${post.id}`)}
-                  >
-                    Editar Postagem
-                  </Button>
+            <div key={post.id} className='flex mb-16'>
+              <div className='flex flex-col min-w-70'>
+                <h2 className='text-primary font-bold'>{post.title}</h2>
+                {post.date && (
+                  <span className='font-normal text-sm leading-[18.15px] mb-4'>
+                    {formatDate(post.date)} - Por Professor(a) {post.author}
+                  </span>
                 )}
+                <div className='flex flex-col items-center md:flex-row-reverse text-justify'>
+                  {renderImage(post, 'md:hidden mb-4')}
+                  <p className='text-justify line-clamp-6 md:line-clamp-4'>
+                    {post.content}
+                  </p>
+                </div>
+
+                <div className='flex flex-col md:flex-row'>
+                  <Button
+                    className='text-white h-12 xl:w-1/3 p-2 rounded-md mt-4 md:mr-3'
+                    onClick={() => router.push(`/posts/${post.id}`)}
+                  >
+                    Continuar a leitura...
+                  </Button>
+                  {((user.role === ROLES.TEACHER &&
+                    user.username === post.author) ||
+                    user.role === ROLES.ADMIN) && (
+                    <Button
+                      variation='secondary'
+                      className='h-12 xl:w-1/3 p-2 rounded-md mt-4'
+                      onClick={() => router.push(`/edit/${post.id}`)}
+                    >
+                      Editar Postagem
+                    </Button>
+                  )}
+                </div>
               </div>
+              {renderImage(post, 'hidden md:block self-end ml-4 mb-0')}
             </div>
           )
         })

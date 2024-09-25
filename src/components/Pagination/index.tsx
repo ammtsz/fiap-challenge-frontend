@@ -25,7 +25,7 @@ const PaginationComponent: React.FC<PaginationComponentProps> = ({
   }
 
   return (
-    <div className='bottom-0 left-0 right-0 flex items-center justify-between p-4 bg-gray-100 rounded-md shadow-md'>
+    <div className='bottom-0 left-0 right-0 flex items-center justify-between p-4 bg-gray-100 rounded-md shadow-md gap-2'>
     <button
       onClick={handlePreviousPage}
       disabled={currentPage === 1}
@@ -33,7 +33,7 @@ const PaginationComponent: React.FC<PaginationComponentProps> = ({
     >
       Anterior
     </button>
-    <span className='text-gray-700'>
+    <span className='text-gray-700 text-nowrap'>
       Página {currentPage} de {totalPages}
     </span>
     <button
