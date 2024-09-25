@@ -2,13 +2,14 @@ import { Label } from '@/components';
 
 interface InputProps extends React.ComponentProps<'input'> {
   className?: string;
-  label: {
+  label?: {
     text: string;
     variation?: 'primary' | 'default';
   };
   type?: string;
   id: string;
   placeholder?: string;
+  hasError?: boolean;
 }
 
 export const Input: React.FC<InputProps> = ({
@@ -18,6 +19,7 @@ export const Input: React.FC<InputProps> = ({
   label,
   placeholder,
   value,
+  hasError,
   ...props
 }) => {
   return (
@@ -27,7 +29,7 @@ export const Input: React.FC<InputProps> = ({
         id={id}
         name={id}
         type={type}
-        className='input'
+        className={hasError ? 'input_error' : 'input'}
         placeholder={placeholder}
         value={value}
         {...props}

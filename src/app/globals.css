@@ -99,6 +99,14 @@ body {
   hover:text-primary_hover
 }
 
+.ghost_btn {
+  @apply
+  btn
+  font-normal
+  text-primary
+  hover:text-primary_hover
+}
+
 .danger_btn {
   @apply
   btn
@@ -107,20 +115,31 @@ body {
   hover:bg-danger_hover
 }
 
-.input {
+.input_base {
   @apply
   w-full
   h-11
   min-h-11
   rounded-lg
-  border-primary
-  border
   bg-white
   px-4
   flex
   items-center
   text-primary
   font-normal
+}
+
+.input {
+  @apply
+  input_base
+  border-primary
+  border
+}
+.input_error {
+  @apply
+  input_base
+  border-2
+  border-red-500
 }
 
 input[type="search"] {

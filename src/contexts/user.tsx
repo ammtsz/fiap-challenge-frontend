@@ -15,6 +15,7 @@ const INITIAL_STATE: User = {
   email: '',
   username: '',
   role: null,
+  id: '',
 };
 
 interface UserContextProps {
