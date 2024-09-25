@@ -30,6 +30,15 @@ const config: Config = {
         danger: "var(--danger)",
         danger_hover: "var(--danger_hover)",
       },
+      keyframes: {
+        slide: {
+          '0%': { transform: 'translateY(100%)' },
+          '100%': { transform: 'translateY(0)' },
+        },
+      },
+      animation: {
+        slide: 'slide 0.2s ease-out',
+      },
     },
   },
   plugins: [],

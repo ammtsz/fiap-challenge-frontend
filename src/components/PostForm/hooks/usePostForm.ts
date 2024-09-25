@@ -5,6 +5,7 @@ import { useUserContext } from '@/contexts';
 import { PostData } from '@/types';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { AddToastProps } from '@/components';
 
 const INITIAL_STATE: PostData = {
   title: '',
@@ -12,8 +13,14 @@ const INITIAL_STATE: PostData = {
   content: '',
 };
 
-export const usePostForm = (id?: string) => {
+interface UsePostFormProps {
+  id?: string;
+  addToast: (pros: AddToastProps) => void;
+}
+
+export const usePostForm = ({id, addToast}: UsePostFormProps) => {
   const [post, setPost] = useState<PostData>(INITIAL_STATE);
+  const [hasError, setError] = useState<boolean>(false);
 
   const { user } = useUserContext();
   const router = useRouter();
@@ -40,14 +47,15 @@ export const usePostForm = (id?: string) => {
     setPost((prev) => ({ ...prev, image: base64String }));
   };
 
-  const handleDelete = async (id: string) => {
-    // TODO: adicionar modal de confirmação de exclusão
+  const handleDelete = (id: string) => async () => {
     const response = await deletePost(id);
     if (response.success) {
       router.push('/');
     } else {
-      // TODO: adicionar feedback de erro
-      console.error(response.error);
+      addToast({
+        message: response.error,
+        type: 'error'
+      });
     }
   };
 
@@ -64,7 +72,7 @@ export const usePostForm = (id?: string) => {
         image: response.value.image,
       });
     } else {
-      console.error(response.error);
+      setError(true);
     }
   };
 
@@ -76,6 +84,7 @@ export const usePostForm = (id?: string) => {
 
   return {
     post,
+    hasError,
     handleChange,
     handleSubmit,
     handleUpload,
