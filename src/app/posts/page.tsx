@@ -10,7 +10,7 @@ import {
 } from '@/components'
 import { usePostsContext, useUserContext } from '@/contexts'
 import { ROLES } from '@/enums/role'
-import { formatDate, formatTime } from '@/utils/dateAndTime'
+import { formatDate } from '@/utils/dateAndTime'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import PaginationComponent from '@/components/Pagination'
@@ -40,8 +40,13 @@ const Posts = () => {
   // Calcula o índice do primeiro post que deve ser exibido na página atual.
   const indexOfFirstPost = indexOfLastPost - postsPerPage
 
-  const currentPosts = sortedPosts.slice(indexOfFirstPost, indexOfLastPost)
   // Array que contém os posts que devem ser exibidos na página atual.
+  const currentPosts = sortedPosts.slice(indexOfFirstPost, indexOfLastPost)
+
+  // Converte a primeira letra da string para maiúscula.
+  const formatRole = (role: string | null) => {
+    return role ?  role.charAt(0).toUpperCase() + role.slice(1) : '';
+  }
 
   useEffect(() => {
     loadPosts()
@@ -75,8 +80,7 @@ const Posts = () => {
               <h2 className='text-primary font-bold'>{post.title}</h2>
               {post.date && (
                 <span className='font-normal text-[15px] leading-[18.15px]'>
-                  {formatDate(post.date)} - Por {post.author} - às{' '}
-                  {formatTime(post.date)}
+                  {formatDate(post.date)} - Por {formatRole(user.role)} {post.author}
                 </span>
               )}
               <div className='flex flex-col items-center md:flex-row-reverse text-justify'>
