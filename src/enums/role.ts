@@ -6,7 +6,7 @@ export const ROLES = {
 
 export const ROLES_LABEL = {
   ADMIN: 'Admin',
-  TEACHER: 'Professor',
-  STUDENT:'Aluno',
+  TEACHER: 'Professor(a)',
+  STUDENT:'Aluno(a)',
 }
 
