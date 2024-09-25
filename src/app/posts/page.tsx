@@ -77,7 +77,7 @@ const Posts = () => {
               <h2 className='text-primary font-bold'>{post.title}</h2>
               {post.date && (
                 <span className='font-normal text-[15px] leading-[18.15px]'>
-                  {formatDate(post.date)} - Por Professor {post.author}
+                  {formatDate(post.date)} - Por Professor(a) {post.author}
                 </span>
               )}
               <div className='flex flex-col items-center md:flex-row-reverse text-justify'>
