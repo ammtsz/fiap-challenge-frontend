@@ -10,19 +10,37 @@ import {
 } from "@/components";
 import { usePostsContext, useUserContext } from "@/contexts";
 import { ROLES } from "@/enums/role";
-import { formatDate, formatTime } from "@/utils/dateAndTime";
-import { useEffect } from "react";
+import { formatDate, formatTime } from "@/utils/dateAndTime"
+import { useEffect, useState } from "react";
 
 import { useRouter } from "next/navigation";
+import PaginationComponent from "@/components/Pagination";
+
 const Posts = () => {
   const { posts, loadPosts } = usePostsContext();
   const { user } = useUserContext();
   const router = useRouter();
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 2; // Número de posts por página
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+  const sortedPosts = posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  // Ordena os posts por data de forma decrescente.
+  const indexOfLastPost = currentPage * postsPerPage;
+  // Calcula o índice do último post que deve ser exibido na página atual. 
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  // Calcula o índice do primeiro post que deve ser exibido na página atual.
+  
+  const currentPosts = sortedPosts.slice(indexOfFirstPost, indexOfLastPost);
+  // Array que contém os posts que devem ser exibidos na página atual.
+
   useEffect(() => {
     loadPosts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+ 
   return (
     <PageContainer>
       <div className="flex flex-col md:flex-row items-center justify-between mb-4">
@@ -39,7 +57,7 @@ const Posts = () => {
 
       <Divider />
       <SearchBar className="block md:hidden" />
-      {posts.map((post) => {
+      {currentPosts.map((post) => {
         return (
           <div key={post.id} className="flex flex-col mb-8 min-w-70">
             <h2 className="text-primary font-bold">{post.title}</h2>
@@ -76,6 +94,10 @@ const Posts = () => {
           </div>
         );
       })}
+      <PaginationComponent 
+        currentPage={currentPage} 
+        onPageChange={handlePageChange} 
+      />
     </PageContainer>
   );
 };
