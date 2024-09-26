@@ -8,6 +8,7 @@ interface TextAreaProps extends React.ComponentProps<'textarea'> {
     variation?: 'primary' | 'default';
   };
   placeholder?: string;
+  hasError?: boolean;
 }
 
 export const TextArea: React.FC<TextAreaProps> = ({
@@ -16,6 +17,7 @@ export const TextArea: React.FC<TextAreaProps> = ({
   label,
   placeholder,
   value,
+  hasError,
   ...props
 }) => {
   return (
@@ -26,7 +28,7 @@ export const TextArea: React.FC<TextAreaProps> = ({
       <textarea
         id={id}
         name={id}
-        className='input p-2'
+        className={`p-2 ${hasError ? 'input_error' : 'input'}`}
         placeholder={placeholder}
         value={value}
         {...props}
