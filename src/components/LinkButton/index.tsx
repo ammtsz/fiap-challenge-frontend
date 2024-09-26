@@ -4,7 +4,7 @@ import Link, { LinkProps } from 'next/link';
 
 interface LinkButtonProps extends LinkProps {
   className?: string;
-  variation?: 'primary' | 'secondary' | 'danger';
+  variation?: 'primary' | 'secondary' | 'tertiary' | 'danger' | 'ghost';
   children: React.ReactNode;
 }
 

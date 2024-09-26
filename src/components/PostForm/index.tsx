@@ -31,7 +31,7 @@ export const PostForm: React.FC<PostFormProps> = ({ id }) => {
   } = usePostForm({ id, addToast });
 
   const { isModalOpen, handleConfirm, handleOpenModal, handleCloseModal } =
-    useConfirmationModal(handleDelete(id as string));
+    useConfirmationModal(handleDelete);
 
   return (
     <>
@@ -79,23 +79,23 @@ export const PostForm: React.FC<PostFormProps> = ({ id }) => {
               {id ? 'Salvar' : 'Publicar'}
             </Button>
             {id && (
-                <Button
-                  className='md:mt-8 flex-grow'
-                  variation='danger'
-                  type='button'
-                  onClick={handleOpenModal}
-                >
-                  Excluir
-                </Button>
+              <Button
+                className='md:mt-8 flex-grow'
+                variation='danger'
+                type='button'
+                onClick={handleOpenModal(id)}
+              >
+                Excluir
+              </Button>
             )}
             <Button
-                  className={`md:mt-8 ${id ? 'flex-grow' : 'auto'}`}
-                  variation='tertiary'
-                  type='button'
-                  onClick={handleGoBack}
-                >
-                  {id ? 'Voltar' : 'Cancelar'}
-                </Button>
+              className={`md:mt-8 ${id ? 'flex-grow' : 'auto'}`}
+              variation='tertiary'
+              type='button'
+              onClick={handleGoBack}
+            >
+              {id ? 'Voltar' : 'Cancelar'}
+            </Button>
           </div>
         </form>
       ) : (
