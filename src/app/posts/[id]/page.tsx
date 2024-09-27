@@ -19,7 +19,7 @@ import { formatDate } from '@/utils/dateAndTime';
 import { useUserContext } from '@/contexts';
 import React from 'react';
 
-export const Post = () => {
+const Post = () => {
   const [post, setPost] = useState<IPost>();
 
   const router = useRouter();
