@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import {
   SearchBar,
@@ -8,49 +8,31 @@ import {
   withAuth,
   Button,
   Feedback,
-} from '@/components'
-import { usePostsContext, useUserContext } from '@/contexts'
-import { ROLES } from '@/enums/role'
-import { formatDate } from '@/utils/dateAndTime'
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
-import PaginationComponent from '@/components/Pagination'
-import Image from 'next/image'
-import defaultImage from '@/assets/book-default.svg'
-import { Post } from '@/types'
+  Pagination,
+  usePagination,
+} from '@/components';
+import { usePostsContext, useUserContext } from '@/contexts';
+import { ROLES } from '@/enums/role';
+import { formatDate } from '@/utils/dateAndTime';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import defaultImage from '@/assets/book-default.svg';
+import { Post } from '@/types';
 
 const Posts = () => {
-  const { posts, loadPosts } = usePostsContext()
-  const { user } = useUserContext()
-  const router = useRouter()
+  const { posts, loadPosts } = usePostsContext();
+  const { user } = useUserContext();
+  const router = useRouter();
 
-  const [currentPage, setCurrentPage] = useState(1)
-  const postsPerPage = 2 // Número de posts por página
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page)
-  }
-
-  // Ordena os posts por data de forma decrescente.
-  const sortedPosts = posts.sort((a, b) => {
-    const dateA = a.date ? new Date(a.date).getTime() : 0
-    const dateB = b.date ? new Date(b.date).getTime() : 0
-    return dateB - dateA
-  })
-
-  // Calcula o índice do último post que deve ser exibido na página atual.
-  const indexOfLastPost = currentPage * postsPerPage
-  // Calcula o índice do primeiro post que deve ser exibido na página atual.
-  const indexOfFirstPost = indexOfLastPost - postsPerPage
-
-  // Array que contém os posts que devem ser exibidos na página atual.
-  const currentPosts = sortedPosts.slice(indexOfFirstPost, indexOfLastPost)
-
-  // Converte a primeira letra da string para maiúscula.
+  const { currentPage, currentPosts, handlePageChange } = usePagination({
+    posts,
+  });
 
   useEffect(() => {
-    loadPosts()
+    loadPosts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
   const renderImage = (post: Post, className: string) => (
     <div
@@ -61,10 +43,10 @@ const Posts = () => {
         alt='Imagem da postagem'
         width={200}
         height={200}
-        className='my-auto rounded-md p-[1px]'
+        className='m-auto rounded-md p-[1px] max-h-[200px] size-fit '
       />
     </div>
-  )
+  );
 
   return (
     <PageContainer>
@@ -93,16 +75,16 @@ const Posts = () => {
         currentPosts.map((post) => {
           return (
             <div key={post.id} className='flex mb-16'>
-              <div className='flex flex-col min-w-70'>
+              <div className='flex flex-col min-w-70 w-full'>
                 <h2 className='text-primary font-bold'>{post.title}</h2>
                 {post.date && (
                   <span className='font-normal text-sm leading-[18.15px] mb-4'>
                     {formatDate(post.date)} - Por Professor(a) {post.author}
                   </span>
                 )}
-                <div className='flex flex-col items-center md:flex-row-reverse text-justify'>
+                <div className='flex flex-col items-center md:flex-row-reverse text-justify min-h-20'>
                   {renderImage(post, 'md:hidden mb-4')}
-                  <p className='text-justify line-clamp-6 md:line-clamp-4'>
+                  <p className='text-justify mr-auto mb-auto line-clamp-6 md:line-clamp-4'>
                     {post.content}
                   </p>
                 </div>
@@ -129,15 +111,12 @@ const Posts = () => {
               </div>
               {renderImage(post, 'hidden md:block self-end ml-4 mb-0')}
             </div>
-          )
+          );
         })
       )}
-      <PaginationComponent
-        currentPage={currentPage}
-        onPageChange={handlePageChange}
-      />
+      <Pagination currentPage={currentPage} onPageChange={handlePageChange} />
     </PageContainer>
-  )
-}
+  );
+};
 
-export default withAuth(Posts, [ROLES.ADMIN, ROLES.TEACHER, ROLES.STUDENT])
+export default withAuth(Posts, [ROLES.ADMIN, ROLES.TEACHER, ROLES.STUDENT]);

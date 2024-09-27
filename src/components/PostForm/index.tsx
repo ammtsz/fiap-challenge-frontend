@@ -32,7 +32,7 @@ export const PostForm: React.FC<PostFormProps> = ({ id }) => {
   } = usePostForm({ id, addToast });
 
   const { isModalOpen, handleConfirm, handleOpenModal, handleCloseModal } =
-    useConfirmationModal(handleDelete(id as string));
+    useConfirmationModal(handleDelete);
 
   if (hasError) {
     return (
@@ -104,7 +104,7 @@ export const PostForm: React.FC<PostFormProps> = ({ id }) => {
                 className='md:mt-8 flex-grow'
                 variation='danger'
                 type='button'
-                onClick={handleOpenModal}
+                onClick={handleOpenModal(id)}
               >
                 Excluir
               </Button>

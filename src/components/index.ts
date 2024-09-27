@@ -21,5 +21,7 @@ export { useToast } from './Toast/hooks/useToast'
 export type { AddToastProps } from './Toast/hooks/useToast'
 export { InputRadio } from './InputRadio'
 export { ErrorMessage } from './ErrorMessage'
+export { Pagination } from './Pagination'
+export { usePagination } from './Pagination/hooks/usePagination'
 
 export { withAuth } from './withAuth'

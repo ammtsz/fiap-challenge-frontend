@@ -64,7 +64,7 @@ export const usePostForm = ({id, addToast}: UsePostFormProps) => {
     setPost((prev) => ({ ...prev, image: base64String }));
   };
 
-  const handleDelete = (id: string) => async () => {
+  const handleDelete = async (id: string) => {
     const response = await deletePost(id);
     if (response.success) {
       router.push('/');
