@@ -6,6 +6,8 @@ import { PostData } from '@/types';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { AddToastProps } from '@/components';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 const INITIAL_STATE: PostData = {
   title: '',
@@ -25,15 +27,7 @@ export const usePostForm = ({id, addToast}: UsePostFormProps) => {
   const { user } = useUserContext();
   const router = useRouter();
 
-  const handleChange: React.ChangeEventHandler<
-    HTMLInputElement | HTMLTextAreaElement
-  > = (event) => {
-    const { value } = event.target;
-    setPost((prev) => ({ ...prev, [event.target.id]: value }));
-  };
-
-  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
-    event.preventDefault();
+  const handleSubmit = () => {
     if (id) {
       updatePost(id, { ...post, userId: user.id });
     } else {
@@ -41,6 +35,29 @@ export const usePostForm = ({id, addToast}: UsePostFormProps) => {
     }
     setPost(INITIAL_STATE);
     router.push('/');
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      title: post.title || '',
+      content: post.content || '',
+    },
+    validationSchema: Yup.object({
+      title: Yup.string().required('Campo obrigatório'),
+      content: Yup.string().min(150, 'O conteúdo deve conter no mínimo 150 caracteres').required('Campo obrigatório'),
+    }),
+    validateOnChange: false,
+    validateOnBlur: false,
+    onSubmit: handleSubmit
+  });
+
+  const handleChange: React.ChangeEventHandler<
+    HTMLInputElement | HTMLTextAreaElement
+  > = (event) => {
+    const { value, name } = event.target;
+    
+    setPost((prev) => ({ ...prev, [name]: value }));
+    formik.setFieldValue(name, value);
   };
 
   const handleUpload = (base64String: string) => {
@@ -71,6 +88,8 @@ export const usePostForm = ({id, addToast}: UsePostFormProps) => {
         content: response.value.content,
         image: response.value.image,
       });
+      formik.setFieldValue('title', response.value.title);
+      formik.setFieldValue('content', response.value.content);
     } else {
       setError(true);
     }
@@ -85,6 +104,7 @@ export const usePostForm = ({id, addToast}: UsePostFormProps) => {
   return {
     post,
     hasError,
+    formik,
     handleChange,
     handleSubmit,
     handleUpload,

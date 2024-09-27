@@ -3,6 +3,7 @@
 import {
   Button,
   ConfirmationModal,
+  ErrorMessage,
   Feedback,
   Input,
   TextArea,
@@ -23,8 +24,8 @@ export const PostForm: React.FC<PostFormProps> = ({ id }) => {
   const {
     post,
     hasError,
+    formik,
     handleChange,
-    handleSubmit,
     handleUpload,
     handleDelete,
     handleGoBack,
@@ -33,11 +34,23 @@ export const PostForm: React.FC<PostFormProps> = ({ id }) => {
   const { isModalOpen, handleConfirm, handleOpenModal, handleCloseModal } =
     useConfirmationModal(handleDelete);
 
+  if (hasError) {
+    return (
+      <Feedback
+        title='Post não encontrado!'
+        description='Verifique se o post existe na página principal.'
+        buttonMessage='Voltar'
+        href='/'
+        className='mt-[20px]'
+      />
+    );
+  }
+
   return (
     <>
       {!hasError ? (
         <form
-          onSubmit={handleSubmit}
+          onSubmit={formik.handleSubmit}
           className='font-inter space-y-4 sm:space-y-8 w-full'
         >
           <Input
@@ -47,9 +60,13 @@ export const PostForm: React.FC<PostFormProps> = ({ id }) => {
               variation: 'primary',
             }}
             placeholder='Título da postagem'
-            value={post.title}
+            value={formik.values.title}
             onChange={handleChange}
+            hasError={!!formik.errors.title}
           />
+          {formik.errors.title ? (
+            <ErrorMessage>{formik.errors.title}</ErrorMessage>
+          ) : null}
           <TextArea
             id='content'
             label={{
@@ -58,9 +75,13 @@ export const PostForm: React.FC<PostFormProps> = ({ id }) => {
             }}
             placeholder='Digite o conteúdo da postagem'
             style={{ height: '225px' }}
-            value={post.content}
+            value={formik.values.content}
             onChange={handleChange}
+            hasError={!!formik.errors.content}
           />
+          {formik.errors.content ? (
+            <ErrorMessage>{formik.errors.content}</ErrorMessage>
+          ) : null}
           <Upload
             id='image'
             message='Clique para carregar uma imagem'
