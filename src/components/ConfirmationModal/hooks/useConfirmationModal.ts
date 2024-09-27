@@ -3,13 +3,22 @@
 import { useState } from 'react';
 
 
-export const useConfirmationModal = (handleConfirmation: () => void) => {
+export const useConfirmationModal = (handleConfirmation: (arg: string) => Promise<void>) => {
   const [isModalOpen, setModalOpen] = useState(false);
+  const [arg, setArg] = useState('');
 
-  const handleOpenModal = () => setModalOpen(true);
-  const handleCloseModal = () => setModalOpen(false);
+  const handleOpenModal = (prop: string) => () => {
+    setModalOpen(true)
+    prop && setArg(prop);
+  };
+  
+  const handleCloseModal = () => {
+    setModalOpen(false)
+    setArg('');
+  };
+
   const handleConfirm = () => {
-    handleConfirmation();
+    handleConfirmation(arg);
     handleCloseModal();
   };
 

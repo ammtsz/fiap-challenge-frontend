@@ -56,7 +56,8 @@ body {
   rounded-lg
   py-1.5
   px-5
-  text-lg
+  text-base
+  md:text-lg
   text-center
   font-inter
   text-ellipsis
@@ -111,6 +112,7 @@ body {
   @apply
   btn
   bg-danger
+  font-bold
   text-white
   hover:bg-danger_hover
 }
