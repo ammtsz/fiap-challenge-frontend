@@ -1,0 +1,10 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: next-frontend
+    ports:
+      - '3001:3001'
+    volumes:
+      - .:/usr/app/frontend
