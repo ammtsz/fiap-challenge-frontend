@@ -61,7 +61,6 @@ const Signup = () => {
     validateOnChange: false,
     validateOnBlur: false,
     onSubmit: (values) => {
-      console.log(JSON.stringify(values, null, 2));
       submitFormData(values);
     },
   });
