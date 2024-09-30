@@ -15,7 +15,7 @@ export const Header: React.FC = () => {
   } = useUserContext();
   const pathname = usePathname();
 
-  const hasSearchBar = PAGES_WITH_SEARCH_BAR.includes(pathname);
+  const hasSearchBar = PAGES_WITH_SEARCH_BAR.includes(pathname) && email;
 
   return (
     <header className='h-[var(--navbar-height)] flex justify-between items-center sm:px-16 px-8 bg-primary text-white font-inter font-bold'>
