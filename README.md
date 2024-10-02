@@ -73,4 +73,4 @@ Desta forma, o frontend pode ser acessado no navegador através de `http://local
 
 # Como utilizar a aplicação e Documentação
 
-Logo na tela principal, clique em **"Registre-se"** para criar um usuário. Usuários do tipo ADMIN ou PROFESSOR podem criar/editar posts. Usuários do tipo ALUNO podem apenas visualizar posts. Para a documentação completa, com passo-a-passo para todos os procedimentos, [acesse aqui](https://www.notion.so/Documenta-o-Tech-Challenge-Fase-3-10feb6993b4a80e69b61db65c7609ab3).
+Logo na tela principal, clique em **"Registre-se"** para criar um usuário. Usuários do tipo ADMIN ou PROFESSOR podem criar/editar posts. Usuários do tipo ALUNO podem apenas visualizar posts. Para a documentação completa, com passo-a-passo para todos os procedimentos, [acesse aqui](https://beryl-sushi-951.notion.site/Documenta-o-Tech-Challenge-Fase-3-10feb6993b4a80e69b61db65c7609ab3).
